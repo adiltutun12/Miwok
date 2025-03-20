@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="@drawable/border"
     android:padding="8dp">
 
-
+    <!--     android:contentDescription="@null"
+    ovaj aribut nam oznacava da zelim da iskljucim opis odnosno da čitač ekrana ignoriše dugme, inace ovaj atribut
+    omogucava korisnicima sa ostećenjem vida da znaju da dugme služi za puštanje zvuka (talkBack) osobe koje koriste čitace
+    -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@color/tan_background"
+        android:contentDescription="@null"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +55,7 @@
         android:layout_width="80dp"
         android:layout_height="70dp"
         android:background="@null"
-        android:contentDescription="NULL"
+        android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.96"
@@ -60,19 +63,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.571"
         app:srcCompat="@drawable/ic_play_arrow" />
-
-
-    <!--
-        android:id="@+id/buttonPlay"
-        android:layout_width="60dp"
-        android:layout_height="58dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307"
-        android:drawableLeft="@drawable/ic_play_arrow"
-        android:background="@null"
-        -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

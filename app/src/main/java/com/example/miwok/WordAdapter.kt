@@ -5,7 +5,6 @@ import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,25 +27,12 @@ class WordAdapter(private val words: List<Word>) :
         return WordViewHolder(view)
     }
 
-    /*
-    override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
-        val word = words[position]
-        holder.miwokText.text = word.miwokTranslation
-        holder.defaultText.text = word.defaultTranslation
-        holder.imageView.setImageResource(word.imageResourceId)
-
-        holder.buttonPlay.setOnClickListener {
-            //Kasnije ide dodavnje logike za dugme play i prosiravnje tako da radi i zvuk ovaj
-        }
-    }
-    */
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val word = words[position]
         holder.miwokText.text = word.miwokTranslation
         holder.defaultText.text = word.defaultTranslation
 
-        //Ako postoji slika p0ostavi je, inače sakrij jer u ovom phrases nema tako da sakrij je
-        //ImageView
+        //Ako postoji slika p0ostavi je, inače sakrij jer u ovom phrases nema tako da sakrij je ImageView
         if (word.imageResourceId != null) {
             holder.imageView.setImageResource(word.imageResourceId)
             holder.imageView.visibility = View.VISIBLE

@@ -23,13 +23,13 @@ class FragmentFamily : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val words = listOf(
-            Word("epe", "father", R.drawable.family_father, R.raw.family_father),
-            Word("ata", "mother", R.drawable.family_mother, R.raw.family_mother),
+            Word("əpə", "father", R.drawable.family_father, R.raw.family_father),
+            Word("əṭa", "mother", R.drawable.family_mother, R.raw.family_mother),
             Word("angsi", "son", R.drawable.family_son, R.raw.family_son),
             Word("tune", "daughter", R.drawable.family_daughter, R.raw.family_daughter),
             Word("taachi", "older brother", R.drawable.family_older_brother, R.raw.family_older_brother),
             Word("chalitti", "younger brother", R.drawable.family_younger_brother, R.raw.family_younger_brother),
-            Word("tete", "older sister", R.drawable.family_older_sister, R.raw.family_older_sister),
+            Word("teṭe", "older sister", R.drawable.family_older_sister, R.raw.family_older_sister),
             Word("kolliti", "younger sister", R.drawable.family_younger_sister, R.raw.family_younger_sister),
             Word("ama", "grandmother", R.drawable.family_grandmother, R.raw.family_grandmother),
             Word("paapa", "grandfather", R.drawable.family_grandfather, R.raw.family_grandfather)

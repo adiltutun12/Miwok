@@ -24,15 +24,15 @@ class FragmentPhrases : Fragment() {
 
         val words = listOf(
             Word("minto wuksus?", "Where are you going?", null, R.raw.phrase_where_are_you_going),
-            Word("tinna oyaase'na", "What is your name?",null, R.raw.phrase_what_is_your_name),
+            Word("tinnə oyaase'nə", "What is your name?",null, R.raw.phrase_what_is_your_name),
             Word("oyaaset...", "My name is...", null, R.raw.phrase_my_name_is),
-            Word("michakses?", "How are you feeling?", null, R.raw.phrase_how_are_you_feeling),
+            Word("michəksəs?", "How are you feeling?", null, R.raw.phrase_how_are_you_feeling),
             Word("kuchi achit", "I'm feeling good.", null, R.raw.phrase_im_feeling_good),
-            Word("aanas'aa?", "Are you coming?", null, R.raw.phrase_are_you_coming),
-            Word("hee'eenem", "Yes, I'm coming.", null, R.raw.phrase_im_coming),
-            Word("eenem", "I'm coming.", null, R.raw.phrase_yes_im_coming),
+            Word("əənəs'aa?", "Are you coming?", null, R.raw.phrase_are_you_coming),
+            Word("həə'əənəm", "Yes, I'm coming.", null, R.raw.phrase_im_coming),
+            Word("əənəm", "I'm coming.", null, R.raw.phrase_yes_im_coming),
             Word("yoowutis", "Let's go.", null, R.raw.phrase_lets_go),
-            Word("enni'nem", "Come here.", null, R.raw.phrase_come_here)
+            Word("ənni'nem", "Come here.", null, R.raw.phrase_come_here)
 
             )
 

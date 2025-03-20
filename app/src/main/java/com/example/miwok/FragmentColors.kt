@@ -23,12 +23,12 @@ class FragmentColors : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val words = listOf(
-            Word("weteti", "red", R.drawable.color_red, R.raw.color_red),
-            Word("chiwiita", "mustard yellow", R.drawable.color_mustard_yellow, R.raw.color_mustard_yellow),
-            Word("topiisa", "dusty yellow", R.drawable.color_dusty_yellow, R.raw.color_dusty_yellow),
+            Word("weṭeṭṭi", "red", R.drawable.color_red, R.raw.color_red),
+            Word("chiwiiṭə", "mustard yellow", R.drawable.color_mustard_yellow, R.raw.color_mustard_yellow),
+            Word("ṭopiisə", "dusty yellow", R.drawable.color_dusty_yellow, R.raw.color_dusty_yellow),
             Word("chokokki", "green", R.drawable.color_green, R.raw.color_green),
-            Word("takaakki", "brown", R.drawable.color_brown, R.raw.color_brown),
-            Word("topoppi", "gray", R.drawable.color_gray, R.raw.color_gray),
+            Word("ṭakaakki", "brown", R.drawable.color_brown, R.raw.color_brown),
+            Word("ṭopoppi", "gray", R.drawable.color_gray, R.raw.color_gray),
             Word("kululli", "black", R.drawable.color_black, R.raw.color_black),
             Word("kelelli", "white", R.drawable.color_white, R.raw.color_white)
 
