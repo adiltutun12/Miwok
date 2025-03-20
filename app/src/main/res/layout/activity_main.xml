@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tan_background"
+    android:background="@color/tab_Default_color"
     tools:context=".MainActivity">
 
     <com.google.android.material.tabs.TabLayout
@@ -13,9 +13,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/tan_background"
-        app:tabIndicatorColor="#F63A1702"
+        app:tabIndicatorColor="#08A408"
         app:tabSelectedTextColor="#F63A1702"
         app:tabTextColor="#000000"
+        app:tabTextAppearance="@style/MyCustomTabTextAppearance"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,7 +24,7 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_numbers" />
+            android:text="@string/category_numbers"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

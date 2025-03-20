@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(this)
         viewPager.adapter = adapter
 
-        // Povezivanje TabLayout-a sa ViewPager2
+        // povezivanje TabLayout-a sa ViewPager2
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
                 0 -> "Numbers"
@@ -30,4 +30,11 @@ class MainActivity : AppCompatActivity() {
             }
         }.attach()
     }
+
+    override fun onPause() {
+        super.onPause()
+        // Oslobodi MediaPlayer za sve fragmente
+        (findViewById<ViewPager2>(R.id.view_pager)?.adapter as? WordAdapter)?.releaseMediaPlayer()
+    }
+
 }

@@ -30,11 +30,23 @@ class FragmentColors : Fragment() {
             Word("ṭakaakki", "brown", R.drawable.color_brown, R.raw.color_brown),
             Word("ṭopoppi", "gray", R.drawable.color_gray, R.raw.color_gray),
             Word("kululli", "black", R.drawable.color_black, R.raw.color_black),
-            Word("kelelli", "white", R.drawable.color_white, R.raw.color_white)
-
-            )
+            Word("kelelli", "white", R.drawable.color_white, R.raw.color_white))
 
         val adapter = WordAdapter(words)
         recyclerView.adapter = adapter
+
+        RecyclerViewDivider.addDivider(recyclerView, requireContext(), "#A8A19E", 3)
+
+        /*
+        val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(divider) */
+
+
     }
+
+    override fun onPause() {
+        super.onPause()
+        (view?.findViewById<RecyclerView>(R.id.recycler_view_colors)?.adapter as? WordAdapter)?.releaseMediaPlayer()
+    }
+
 }

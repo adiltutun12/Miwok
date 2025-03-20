@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class FragmentPhrases : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,11 +34,23 @@ class FragmentPhrases : Fragment() {
             Word("həə'əənəm", "Yes, I'm coming.", null, R.raw.phrase_im_coming),
             Word("əənəm", "I'm coming.", null, R.raw.phrase_yes_im_coming),
             Word("yoowutis", "Let's go.", null, R.raw.phrase_lets_go),
-            Word("ənni'nem", "Come here.", null, R.raw.phrase_come_here)
-
-            )
+            Word("ənni'nem", "Come here.", null, R.raw.phrase_come_here))
 
         val adapter = WordAdapter(words)
         recyclerView.adapter = adapter
+
+        RecyclerViewDivider.addDivider(recyclerView, requireContext(), "#A8A19E", 3)
+
+        /*
+        val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(divider)
+        */
+
     }
+
+    override fun onPause() {
+        super.onPause()
+        (view?.findViewById<RecyclerView>(R.id.recycler_view_phrases)?.adapter as? WordAdapter)?.releaseMediaPlayer()
+    }
+
 }

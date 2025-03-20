@@ -32,11 +32,23 @@ class FragmentNumbers : Fragment() {
             Word("kenekaku", "seven", R.drawable.number_seven,  R.raw.number_seven),
             Word("kawinta", "eight", R.drawable.number_eight,  R.raw.number_eight),
             Word("wo'e", "nine", R.drawable.number_nine,  R.raw.number_nine),
-            Word("na'aacha", "ten", R.drawable.number_ten,  R.raw.number_ten)
-
-            )
+            Word("na'aacha", "ten", R.drawable.number_ten,  R.raw.number_ten))
 
         val adapter = WordAdapter(words)
         recyclerView.adapter = adapter
+
+        RecyclerViewDivider.addDivider(recyclerView, requireContext(), "#A8A19E", 3)
+
+        /*
+        val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(divider)
+       */
+
     }
+
+    override fun onPause() {
+        super.onPause()
+        (view?.findViewById<RecyclerView>(R.id.recycler_view_numbers)?.adapter as? WordAdapter)?.releaseMediaPlayer()
+    }
+
 }

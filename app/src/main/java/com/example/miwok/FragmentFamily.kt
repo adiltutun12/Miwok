@@ -32,11 +32,23 @@ class FragmentFamily : Fragment() {
             Word("teṭe", "older sister", R.drawable.family_older_sister, R.raw.family_older_sister),
             Word("kolliti", "younger sister", R.drawable.family_younger_sister, R.raw.family_younger_sister),
             Word("ama", "grandmother", R.drawable.family_grandmother, R.raw.family_grandmother),
-            Word("paapa", "grandfather", R.drawable.family_grandfather, R.raw.family_grandfather)
-
-            )
+            Word("paapa", "grandfather", R.drawable.family_grandfather, R.raw.family_grandfather))
 
         val adapter = WordAdapter(words)
         recyclerView.adapter = adapter
+
+        RecyclerViewDivider.addDivider(recyclerView, requireContext(), "#A8A19E", 3)
+
+        /*
+        val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(divider)
+        */
+
     }
+
+    override fun onPause() {
+        super.onPause()
+        (view?.findViewById<RecyclerView>(R.id.recycler_view_family)?.adapter as? WordAdapter)?.releaseMediaPlayer()
+    }
+
 }
