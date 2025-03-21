@@ -10,29 +10,33 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class WordAdapter(private val words: List<Word>) :
-    RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
+    RecyclerView.Adapter<WordAdapter.WordViewHolder>() { //lista wordova da bude prikazana u recycler viewu, povezuje podatke sa recyclerviewom
+        //WordViewHolder optimizuje podatke da ih ne moramo svaki put prikazivati
         //sada ću ovdje dodati media player prvo dodajem varijablu
         //MediaPlayer je varijabla koja sluzi za pustanje zvuka
         private var mediaPlayer : MediaPlayer? = null
 
+    //optimizovan prikaz da nne moramo svaki put ponovno kreirati view
+
+    //drzi refernece na ui elementata jednog reda
+    //kada ovo uradimo ne moramo svaki put pozivati da pronadje id elementa kada skrolamo
     class WordViewHolder(view: View) : RecyclerView.ViewHolder(view) { //definisanje elementa u svakom redu liste
         val miwokText: TextView = view.findViewById(R.id.text)
         val defaultText: TextView = view.findViewById(R.id.text2)
         val imageView: ImageView = view.findViewById(R.id.imageView)
-        //val buttonPlay: ImageView = view.findViewById(R.id.imageView2)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder { //pravi novi red u listi
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_word, parent, false) //ucita item_word u memoriju, ova metoda je kreiranje novoh Viewa
         return WordViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: WordViewHolder, position: Int) { //postavlja tacne vrijednosti u UI elemente fakticki popunjava ispravnim podacima
         val word = words[position]
         holder.miwokText.text = word.miwokTranslation //postavljam ovdje miwok jezik
         holder.defaultText.text = word.defaultTranslation //ovdje postavljam eng prijevodd
 
-        //Ako postoji slika p0ostavi je, inače sakrij jer u ovom phrases nema tako da sakrij je ImageView
+        //Ako postoji slika p0ostavi je, inače sakrij jer u ovom phrases nema tako da sakrij je
         if (word.imageResourceId != null) {
             holder.imageView.setImageResource(word.imageResourceId)
             holder.imageView.visibility = View.VISIBLE
@@ -61,7 +65,7 @@ class WordAdapter(private val words: List<Word>) :
     }
 
 
-    fun releaseMediaPlayer() { //dodana metoda za zaustavljanje i oslobadjanje resursa imam ovdje dupilicranje kasnije cu popraviti
+    fun releaseMediaPlayer() { //dodana metoda za zaustavljanje i oslobadjanje resursa, sprjecava i viseklikabnost da se pokrece vise puta te se mijesa zvuk
         mediaPlayer?.release()
         mediaPlayer = null
     }

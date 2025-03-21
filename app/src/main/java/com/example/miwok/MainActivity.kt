@@ -1,4 +1,5 @@
 package com.example.miwok
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -28,12 +29,11 @@ class MainActivity : AppCompatActivity() {
                 3 -> "Phrases"
                 else -> "Numbers"
             }
-        }.attach()
+        }.attach() //swipe i veoma cudno neko ponašanje bukv na touch prebaci na koji fragment pokazuje, ali ne mijenja layout ili mijenja layout alii gore ne prebacuje fragmenta
     }
 
     override fun onPause() {
         super.onPause()
-        // Oslobodi MediaPlayer za sve fragmente
         (findViewById<ViewPager2>(R.id.view_pager)?.adapter as? WordAdapter)?.releaseMediaPlayer()
     }
 

@@ -9,11 +9,12 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapte
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> FragmentNumbers()
-            1 -> FragmentFamily()
-            2 -> FragmentColors()
-            3 -> FragmentPhrases()
-            else -> FragmentNumbers()
+            0 -> WordListFragment.newInstance("numbers")
+            1 -> WordListFragment.newInstance("family")
+            2 -> WordListFragment.newInstance("colors")
+            3 -> WordListFragment.newInstance("phrases")
+            else -> WordListFragment.newInstance("numbers")
         }
     }
+
 }
