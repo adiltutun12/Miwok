@@ -8,7 +8,7 @@
     android:padding="0dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"> <!-- Dodaje ripple efekt na dodir -->
+    android:foreground="?attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/imageView"
