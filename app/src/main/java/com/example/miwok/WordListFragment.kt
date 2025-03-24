@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.miwok.databinding.ItemFragmentBinding
 
 class WordListFragment : Fragment() {
 
@@ -16,15 +16,17 @@ class WordListFragment : Fragment() {
 
         fun newInstance(category: String): WordListFragment {
             val fragment = WordListFragment()
-            val args = Bundle()
-            args.putString(ARG_CATEGORY, category)
-            fragment.arguments = args
+            fragment.arguments = Bundle().apply {
+                putString(ARG_CATEGORY, category)
+            }
             return fragment
         }
     }
 
     private lateinit var wordList: List<Word>
     private var backgroundColorRes: Int = R.color.category_numbers
+    private var _binding: ItemFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,27 +47,35 @@ class WordListFragment : Fragment() {
                 wordList = WordData.phrases
                 backgroundColorRes = R.color.category_phrases
             }
+            else -> {
+                wordList = emptyList()
+                backgroundColorRes = R.color.category_numbers
+            }
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.item_fragment, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = ItemFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        view.setBackgroundColor(ContextCompat.getColor(requireContext(), backgroundColorRes))
-
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = WordAdapter(wordList)
-
-        RecyclerViewDivider.addDivider(recyclerView, requireContext()) //pozvana jer sam joj vec unaprijed stavio parametre
+        binding.root.setBackgroundColor(ContextCompat.getColor(requireContext(), backgroundColorRes))
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.adapter = WordAdapter(wordList)
+        RecyclerViewDivider.addDivider(binding.recyclerView, requireContext())
     }
 
     override fun onPause() {
         super.onPause()
-        (view?.findViewById<RecyclerView>(R.id.recycler_view)?.adapter as? WordAdapter)?.releaseMediaPlayer()
+        (binding.recyclerView.adapter as? WordAdapter)?.releaseMediaPlayer()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
