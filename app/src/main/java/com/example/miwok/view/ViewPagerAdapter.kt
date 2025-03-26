@@ -1,4 +1,4 @@
-package com.example.miwok
+package com.example.miwok.view
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -16,5 +16,4 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapte
             else -> WordListFragment.newInstance("numbers")
         }
     }
-
 }

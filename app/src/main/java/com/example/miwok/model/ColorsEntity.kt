@@ -1,10 +1,10 @@
-package com.example.miwok
+package com.example.miwok.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "numbers")
-data class NumbersEntity(
+@Entity(tableName = "colors")
+data class ColorsEntity(
     @PrimaryKey(autoGenerate = true) val id: Int =0,
     val miwokTranslation: String,
     val defaultTranslation: String,

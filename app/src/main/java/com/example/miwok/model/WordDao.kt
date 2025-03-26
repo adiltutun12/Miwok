@@ -1,4 +1,4 @@
-package com.example.miwok
+package com.example.miwok.model
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -19,8 +19,4 @@ interface WordDao {
 
     @Query("SELECT * FROM phrases")
     fun getPhrases() : Flow<List<PhrasesEntity>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE) //za ubacivanje iz aplikace kada bih radio ovo potrebno imati
-    suspend fun insertNumbers(list: List<NumbersEntity>)
-
 }

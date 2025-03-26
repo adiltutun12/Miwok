@@ -1,15 +1,9 @@
-package com.example.miwok
+package com.example.miwok.model
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.miwok.ColorsEntity
-import com.example.miwok.FamilyEntity
-import com.example.miwok.NumbersEntity
-import com.example.miwok.PhrasesEntity
-import com.example.miwok.WordDao
 
 @Database(
     entities = [
@@ -23,7 +17,6 @@ import com.example.miwok.WordDao
 )
 abstract class MiwokDatabase : RoomDatabase() {
     abstract fun wordDao(): WordDao
-
 
     companion object {
         @Volatile private var INSTANCE: MiwokDatabase? = null
