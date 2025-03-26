@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miwok.databinding.ItemWordBinding
 
-class WordAdapter(private val words: List<Word>) :
+class WordAdapter(private val words: MutableList<Word>) :
     RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
 
     private var mediaPlayer: MediaPlayer? = null
@@ -28,6 +28,13 @@ class WordAdapter(private val words: List<Word>) :
             playAudio(holder.binding.root.context, word.audioResourceId)
         }
     }
+
+    fun updateList(newWords: List<Word>) {
+        words.clear()
+        words.addAll(newWords)    //dinamicko osvjezavanje liseze
+        notifyDataSetChanged()
+    }
+
 
     override fun getItemCount(): Int = words.size
 
