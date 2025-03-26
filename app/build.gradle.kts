@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("kotlin-kapt") // <-- Dodaj ovo
+    id("com.google.devtools.ksp")
+    id("kotlin-kapt")
 }
 
 android {
@@ -29,29 +30,32 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
-    buildFeatures{
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    buildFeatures {
         dataBinding = true
         viewBinding = true
     }
-
 }
-
 
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-
-    // implementation(libs.material.v1120)
     implementation(libs.androidx.viewpager2)
 
+    // Room (sa KSP umjesto kapt)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
