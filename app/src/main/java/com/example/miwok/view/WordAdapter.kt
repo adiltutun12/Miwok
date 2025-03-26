@@ -1,16 +1,17 @@
-package com.example.miwok
+package com.example.miwok.view
 
-import android.content.Context
-import android.media.MediaPlayer
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miwok.databinding.ItemWordBinding
+import com.example.miwok.model.Word
+import com.example.miwok.viewmodel.WordViewModel
 
-class WordAdapter(private val words: MutableList<Word>) :
+//ovdje kao konstruktor sam proslijedio i ovaj wordview
+class WordAdapter(private val words: MutableList<Word>, private val wordview : WordViewModel) :
+
     RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
-
-    private var mediaPlayer: MediaPlayer? = null
 
     class WordViewHolder(val binding: ItemWordBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -25,30 +26,17 @@ class WordAdapter(private val words: MutableList<Word>) :
         holder.binding.word = word
 
         holder.binding.root.setOnClickListener {
-            playAudio(holder.binding.root.context, word.audioResourceId)
+            wordview.playAudio(word.audioResourceId)
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(newWords: List<Word>) {
         words.clear()
         words.addAll(newWords)    //dinamicko osvjezavanje liseze
         notifyDataSetChanged()
     }
 
-
     override fun getItemCount(): Int = words.size
 
-    fun releaseMediaPlayer() {
-        mediaPlayer?.release()
-        mediaPlayer = null
-    }
-
-    private fun playAudio(context: Context, audioResId: Int) {
-        releaseMediaPlayer()
-        mediaPlayer = MediaPlayer.create(context, audioResId)
-        mediaPlayer?.start()
-        mediaPlayer?.setOnCompletionListener {
-            releaseMediaPlayer()
-        }
-    }
 }

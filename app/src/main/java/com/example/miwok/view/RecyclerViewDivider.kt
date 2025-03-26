@@ -1,4 +1,4 @@
-package com.example.miwok
+package com.example.miwok.view
 
 import android.content.Context
 import android.graphics.Color
