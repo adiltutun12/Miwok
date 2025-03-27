@@ -14,28 +14,23 @@ class WordDiffUtil(
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        // Uporedi ID-eve ili neki drugi jedinstveni atribut svakog objekta
         return oldList[oldItemPosition].defaultTranslation == newList[newItemPosition].defaultTranslation
+        //ako vrati true diffUtil zna da je to ista stavka i provjerava samo podatke
+        //Ako vraća false, smatra da je to potpuno nova stavka.
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        // Uporedi sve relevantne atribute objekta
         return oldList[oldItemPosition] == newList[newItemPosition]
+        //Ako vraća true, RecyclerView neće ažurirati tu stavku, jer je ista.
+        //Ako vraća false, RecyclerView će osvježiti tu stavku jer se njen sadržaj promijenio.
     }
 }
 
+/* DiffUtil automatski izračunava razlike između stare i nove liste i obavještava RecyclerView
+samo o onim stavkama koje su se zaista promijenile, umjesto da ponovo crta sve.
 
-/*
-
-@SuppressLint("NotifyDataSetChanged")
-fun updateList(newWords: List<Word>) {
-    val diffCallback = WordDiffCallback(words, newWords)
-    val diffResult = DiffUtil.calculateDiff(diffCallback)
-
-    words.clear()
-    words.addAll(newWords)
-    diffResult.dispatchUpdatesTo(this)  // Ovdje se koristi adapter (this)
-}
+-Određuje koje stavke treba ažurirati, dodati ili ukloniti.
+-Efikasno ažurira samo promijenjene stavke u RecyclerView
 
 
- */
+*/
