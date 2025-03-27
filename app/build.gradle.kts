@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -51,7 +51,8 @@ dependencies {
     implementation(libs.androidx.viewpager2)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
+    implementation(libs.transport.runtime)
+    kapt(libs.androidx.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -61,5 +62,11 @@ dependencies {
     implementation (libs.androidx.fragment.ktx)
     implementation (libs.androidx.lifecycle.viewmodel.ktx.v240)
 
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+
 }
 
+kapt {
+    correctErrorTypes = true
+}

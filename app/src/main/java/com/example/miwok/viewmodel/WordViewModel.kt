@@ -5,13 +5,21 @@ import android.media.MediaPlayer
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.miwok.model.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WordViewModel(application: Application) : AndroidViewModel(application) {
-    private val database = MiwokDatabase.getDatabase(application)
-    private val wordDao = database.wordDao()
+//class WordViewModel(application: Application) : AndroidViewModel(application) {
+    // private val database = MiwokDatabase.getDatabase(application)
+    // private val wordDao = database.wordDao()
+
+@HiltViewModel //ova anotacija oznacava da hilt upravlja ovim viewmodeom i dozvoljava injectovanje zavisnosti direktno u konstruktor
+class WordViewModel @Inject constructor( //ovo omogucava da se automatski pruzaju potrebne zavisnosti
+    application: Application,
+    private val wordDao: WordDao // Injectovano direktno ovdje ovo preko hilta, ovo radimo umjesto da stvaramo instanci MIwokDatabase i izvlačimo WOrdDao sada ga injectujemo direktno, olakšava testiranje i upravljanje kodom zakomentarisno je kako je bez injecta ovo
+    ) : AndroidViewModel(application){
 
     private var mediaPlayer: MediaPlayer? = null
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +33,11 @@ class WordListFragment : Fragment() {
     private val binding get() = _binding!!
 
     // ViewModel instance
-    private val viewModel: WordViewModel by viewModels()  //koristen viewmodel ovdje laganiiiiiii
+
+    //private val viewModel: WordViewModel by viewModels()  //koristen viewmodel ovdje laganiiiiiii ali bez hilta razlika je samo psolije by sto ide activityViewModels() sa HILTOM
+
+    private val viewModel: WordViewModel by activityViewModels() //ovo je promijenjeno zbog ovog hilta
+
     private lateinit var adapter: WordAdapter // Adapter za prikaz podataka
 
     override fun onCreateView(
@@ -62,7 +67,6 @@ class WordListFragment : Fragment() {
             }
         }
 
-        // Postavljanje boje pozadine na osnovu kategorije
         val backgroundColor = when (category) {
             "numbers" -> R.color.category_numbers
             "family" -> R.color.category_family
