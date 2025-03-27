@@ -6,8 +6,9 @@ import androidx.databinding.DataBindingUtil
 import com.example.miwok.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.example.miwok.view.ViewPagerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint //ne zahtijvea neke prevelike promjene jer ne injecttam nikakve objekte direktno
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
