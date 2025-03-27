@@ -7,23 +7,27 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.miwok.Category
 import com.example.miwok.R
+import com.example.miwok.WordAdapterListener
 import com.example.miwok.databinding.ItemFragmentBinding
+import com.example.miwok.model.Word
 import com.example.miwok.viewmodel.WordViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class WordListFragment : Fragment() {
+class WordListFragment : Fragment(), WordAdapterListener {
 
     companion object {
         private const val ARG_CATEGORY = "category"
 
-        fun newInstance(category: String): WordListFragment {
+        // Kreira novu instancu fragmenta sa prosleđenom kategorijom
+        fun newInstance(category: Category): WordListFragment {
             val fragment = WordListFragment()
             fragment.arguments = Bundle().apply {
-                putString(ARG_CATEGORY, category)
+                putSerializable(ARG_CATEGORY, category.name) // Kategorija kao String
             }
             return fragment
         }
@@ -31,14 +35,8 @@ class WordListFragment : Fragment() {
 
     private var _binding: ItemFragmentBinding? = null
     private val binding get() = _binding!!
-
-    // ViewModel instance
-
-    //private val viewModel: WordViewModel by viewModels()  //koristen viewmodel ovdje laganiiiiiii ali bez hilta razlika je samo psolije by sto ide activityViewModels() sa HILTOM
-
-    private val viewModel: WordViewModel by activityViewModels() //ovo je promijenjeno zbog ovog hilta
-
-    private lateinit var adapter: WordAdapter // Adapter za prikaz podataka
+    private val viewModel: WordViewModel by activityViewModels()  // Uzima ViewModel
+    private lateinit var adapter: WordAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -50,29 +48,31 @@ class WordListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = WordAdapter(mutableListOf(),viewModel) //ovdje incijaliziram adapter sa view modelom kako bih mogao upravljati repordukcijom zvuka
+        adapter = WordAdapter(mutableListOf(), this)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         RecyclerViewDivider.addDivider(binding.recyclerView, requireContext())
 
-        val category = arguments?.getString(ARG_CATEGORY) ?: "numbers"
-        viewModel.loadWords(category)  // Pozivanje učitavanja podataka prema kategoriji
+        val categoryName = arguments?.getString(ARG_CATEGORY)
+        val category = categoryName?.let { Category.valueOf(it) } ?: Category.NUMBERS
+        viewModel.loadWords(category)
 
-        lifecycleScope.launch {
+
+       lifecycleScope.launch {
             when (category) {
-                "numbers" -> viewModel.numbers.collect { adapter.updateList(it) }
-                "family" -> viewModel.family.collect { adapter.updateList(it) }
-                "colors" -> viewModel.colors.collect { adapter.updateList(it) }
-                "phrases" -> viewModel.phrases.collect { adapter.updateList(it) }
+                Category.NUMBERS -> viewModel.numbers.collectLatest { adapter.updateList(it) }
+                Category.FAMILY -> viewModel.family.collectLatest { adapter.updateList(it) }
+                Category.COLORS -> viewModel.colors.collectLatest { adapter.updateList(it) }
+                Category.PHRASES -> viewModel.phrases.collectLatest { adapter.updateList(it) }
             }
         }
 
+
         val backgroundColor = when (category) {
-            "numbers" -> R.color.category_numbers
-            "family" -> R.color.category_family
-            "colors" -> R.color.category_colors
-            "phrases" -> R.color.category_phrases
-            else -> R.color.category_numbers
+            Category.NUMBERS -> R.color.category_numbers
+            Category.FAMILY -> R.color.category_family
+            Category.COLORS -> R.color.category_colors
+            Category.PHRASES -> R.color.category_phrases
         }
         binding.root.setBackgroundColor(ContextCompat.getColor(requireContext(), backgroundColor))
     }
@@ -85,5 +85,9 @@ class WordListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onWordClick(word: Word) {
+        viewModel.playAudio(word.audioResourceId)
     }
 }

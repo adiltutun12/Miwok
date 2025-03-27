@@ -8,7 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.example.miwok.view.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint //ne zahtijvea neke prevelike promjene jer ne injecttam nikakve objekte direktno
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -22,13 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewPager.adapter = adapter
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = when (position) {
-                0 -> "Numbers"
-                1 -> "Family"
-                2 -> "Colors"
-                3 -> "Phrases"
-                else -> ""
-            }
+            tab.text = getString(Category.entries[position].titleResId)
         }.attach()
     }
 }

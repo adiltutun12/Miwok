@@ -5,13 +5,16 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
+import android.view.View
+import android.widget.ImageView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-
+import androidx.core.graphics.toColorInt
+import androidx.databinding.BindingAdapter
 
 object RecyclerViewDivider {
     fun addDivider(recyclerView: RecyclerView, context: Context, colorHex: String = "#A8A19E", height: Int = 3) {
-        val color = Color.parseColor(colorHex) //parsiranje HEX string u int boju
+        val color = colorHex.toColorInt()
 
         val dividerDrawable = ShapeDrawable(RectShape()).apply {
             intrinsicHeight = height
@@ -26,4 +29,3 @@ object RecyclerViewDivider {
         recyclerView.addItemDecoration(divider)
     }
 }
-//ovo sam bio zeznuo radi teme uredjaja zbog toga se zeznulo ovo , zato cu sada korisitiii defaultni divider bio sam stavio pogrešnu temu i to me zeznulo

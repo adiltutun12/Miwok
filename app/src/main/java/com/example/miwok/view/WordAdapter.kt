@@ -3,13 +3,16 @@ package com.example.miwok.view
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.miwok.WordAdapterListener
+import com.example.miwok.WordDiffUtil
 import com.example.miwok.databinding.ItemWordBinding
 import com.example.miwok.model.Word
 import com.example.miwok.viewmodel.WordViewModel
 
-//ovdje kao konstruktor sam proslijedio i ovaj wordview
-class WordAdapter(private val words: MutableList<Word>, private val wordview : WordViewModel) :
+class WordAdapter(private val words: MutableList<Word>,
+                  private val listener: WordAdapterListener) :
 
     RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
 
@@ -26,16 +29,20 @@ class WordAdapter(private val words: MutableList<Word>, private val wordview : W
         holder.binding.word = word
 
         holder.binding.root.setOnClickListener {
-            wordview.playAudio(word.audioResourceId)
+            listener.onWordClick(word)
         }
     }
 
+
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(newWords: List<Word>) {
+        val diffCallback = WordDiffUtil(words, newWords)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         words.clear()
-        words.addAll(newWords)    //dinamicko osvjezavanje liseze
-        notifyDataSetChanged()
+        words.addAll(newWords)//dinamicko osvjezavanje liseze
+        diffResult.dispatchUpdatesTo(this)  // Ovdje se koristi adapter (this)
     }
+
 
     override fun getItemCount(): Int = words.size
 

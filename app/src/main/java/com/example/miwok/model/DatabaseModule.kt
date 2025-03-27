@@ -22,5 +22,7 @@ object DatabaseModule {
         return database.wordDao()
     }
 }
-//ovaj modul pruza instancu za bazu podataka i dao
+
+
+
 

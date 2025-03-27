@@ -23,5 +23,6 @@
 
     <!--Text color for tabs-->
     <color name="tab_Default_color">#A8A19E</color>>
+    <color name="ic_launcher_background">#FB8C00</color>
 
 </resources>
