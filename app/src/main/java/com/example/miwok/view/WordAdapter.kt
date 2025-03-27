@@ -33,16 +33,14 @@ class WordAdapter(private val words: MutableList<Word>,
         }
     }
 
-
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(newWords: List<Word>) {
         val diffCallback = WordDiffUtil(words, newWords)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         words.clear()
         words.addAll(newWords)//dinamicko osvjezavanje liseze
-        diffResult.dispatchUpdatesTo(this)  // Ovdje se koristi adapter (this)
+        diffResult.dispatchUpdatesTo(this)
     }
-
 
     override fun getItemCount(): Int = words.size
 
