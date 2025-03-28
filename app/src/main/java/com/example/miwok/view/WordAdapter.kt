@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.miwok.WordAdapterListener
-import com.example.miwok.WordDiffUtil
 import com.example.miwok.databinding.ItemWordBinding
 import com.example.miwok.model.Word
-import com.example.miwok.viewmodel.WordViewModel
 
 class WordAdapter(private val words: MutableList<Word>,
-                  private val listener: WordAdapterListener) :
+                  private val listener: WordAdapterListener
+) :
 
     RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
 
