@@ -38,7 +38,7 @@ class WordAdapter(private val words: MutableList<Word>,
         val diffCallback = WordDiffUtil(words, newWords)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         words.clear()
-        words.addAll(newWords)//dinamicko osvjezavanje liseze
+        words.addAll(newWords)
         diffResult.dispatchUpdatesTo(this)
     }
 
