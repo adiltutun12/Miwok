@@ -1,4 +1,6 @@
-package com.example.miwok
+package com.example.miwok.model
+
+import com.example.miwok.R
 
 enum class Category(val titleResId: Int) {
     NUMBERS(R.string.category_numbers),

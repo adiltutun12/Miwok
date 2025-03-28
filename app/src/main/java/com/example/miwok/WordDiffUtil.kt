@@ -10,7 +10,6 @@ class WordDiffUtil(
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldList.size
-
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
@@ -25,12 +24,3 @@ class WordDiffUtil(
         //Ako vraća false, RecyclerView će osvježiti tu stavku jer se njen sadržaj promijenio.
     }
 }
-
-/* DiffUtil automatski izračunava razlike između stare i nove liste i obavještava RecyclerView
-samo o onim stavkama koje su se zaista promijenile, umjesto da ponovo crta sve.
-
--Određuje koje stavke treba ažurirati, dodati ili ukloniti.
--Efikasno ažurira samo promijenjene stavke u RecyclerView
-
-
-*/

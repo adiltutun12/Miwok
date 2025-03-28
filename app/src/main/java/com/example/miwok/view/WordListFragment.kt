@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.miwok.Category
+import com.example.miwok.model.Category
 import com.example.miwok.R
 import com.example.miwok.WordAdapterListener
 import com.example.miwok.databinding.ItemFragmentBinding
@@ -23,11 +23,10 @@ class WordListFragment : Fragment(), WordAdapterListener {
     companion object {
         private const val ARG_CATEGORY = "category"
 
-        // Kreira novu instancu fragmenta sa prosleđenom kategorijom
         fun newInstance(category: Category): WordListFragment {
             val fragment = WordListFragment()
             fragment.arguments = Bundle().apply {
-                putSerializable(ARG_CATEGORY, category.name) // Kategorija kao String
+                putSerializable(ARG_CATEGORY, category.name)
             }
             return fragment
         }
@@ -35,7 +34,7 @@ class WordListFragment : Fragment(), WordAdapterListener {
 
     private var _binding: ItemFragmentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: WordViewModel by activityViewModels()  // Uzima ViewModel
+    private val viewModel: WordViewModel by activityViewModels()
     private lateinit var adapter: WordAdapter
 
     override fun onCreateView(

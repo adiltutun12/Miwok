@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.miwok.databinding.ActivityMainBinding
+import com.example.miwok.model.Category
 import com.google.android.material.tabs.TabLayoutMediator
 import com.example.miwok.view.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
