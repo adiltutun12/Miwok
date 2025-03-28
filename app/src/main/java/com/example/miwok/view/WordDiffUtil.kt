@@ -1,4 +1,4 @@
-package com.example.miwok
+package com.example.miwok.view
 
 
 import androidx.recyclerview.widget.DiffUtil

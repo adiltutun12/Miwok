@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.miwok.model.Category
 import com.example.miwok.R
-import com.example.miwok.WordAdapterListener
 import com.example.miwok.databinding.ItemFragmentBinding
 import com.example.miwok.model.Word
 import com.example.miwok.viewmodel.WordViewModel
